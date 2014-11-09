@@ -1,0 +1,13 @@
+{% extends 'sniff/base.html' %}
+
+{% block title %}Stephen's Title{% endblock %}
+
+{% block body_block %}
+<div class="row marketing">
+<form action="/find_mac/" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit" />
+</form>
+</div>
+{% endblock %}

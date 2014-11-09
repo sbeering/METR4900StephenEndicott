@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+	<head>
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <!-- Bootstrap -->
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		
+		<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+	    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
+		
+		<script src="{% static 'datetimepicker/js/bootstrap-datetimepicker.min.js' %}"></script>
+		<link href="{% static 'datetimepicker/css/bootstrap-datetimepicker.css' %}" rel="stylesheet" media="screen">
+		
+		<script src="{% static 'nvd3/lib/d3.v3.js' %}"></script>
+		<script src="{% static 'nvd3/nv.d3.js' %}"></script>
+		<link rel="stylesheet" type="text/css" href="{% static 'nvd3/nv.d3.css' %}">
+		
+		<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.2/css/jquery.dataTables.css">
+		<link rel="shortcut icon" href="{% static 'stephen.ico' %}" />
+
+	    <title>{% block title %}Stephen's Thesis{% endblock %}</title>
+	</head>
+
+	<body>
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href={% url 'sniff:index' %} >Thesis</a>
+
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href={% url 'sniff:index' %}>Home</a></li>
+            <li><a href={% url 'sniff:about' %}>About</a></li>
+
+
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href={% url 'sniff:find_mac' %}>Find Mac</a></li>
+			<li><a href={% url 'sniff:top_devices' %}>Top Devices</a></li>
+			<li><a href={% url 'sniff:enter_shifts' %}>Enter Shifts</a></li>
+
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+
+
+    <div class="container" style="padding-top:5%;">
+      <!-- Example row of columns -->
+      {% block body_block %}{% endblock %}
+
+      <hr>
+
+      <footer>
+        <p>&copy; Stephen Endicott 2014<br>admin@stephenendicott.com.au</p>
+      </footer>
+    </div> <!-- /container -->
+
+	    
+	</body>
+</html>

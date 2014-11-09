@@ -1,0 +1,49 @@
+{% extends 'sniff/base.html' %}
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.2/css/jquery.dataTables.css">
+
+{% block title %}Shift analysis{% endblock %}
+{% block body_block %}
+<h1>Top Devics for week begining {{ week_start|date:"D d M Y" }}</h1>
+
+
+
+
+
+<div class="row marketing">
+	<table class="table" id="shift_analysis">
+		<thead>
+			<tr>
+				<th>Position</th>
+				<th>Device</th>
+				<th>Score</th>
+				<th>Start Score</th>
+				<th>Ratio</th>
+				<th>total</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for mac,device in devices %}
+				<tr>
+					<td>{{ device.num }}</td>
+					<td>{{ mac }}</td>
+					<td>{{ device.score }}</td>
+					<td>{{ device.start_score }}</td>
+					<td>{{ device.ratio }}</td>
+					<td>{{ device.total }}</td>
+				</tr>    
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+
+
+<script>
+$(document).ready( function() {	
+	$('#shift_analysis').dataTable( {
+        "iDisplayLength": 50
+    } );
+} )
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends 'sniff/base.html' %}
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.2/css/jquery.dataTables.css">
+
+
+{% block title %}Test page{% endblock %}
+{% block body_block %}
+<style>
+
+#chart svg {
+  height: 400px;
+}
+
+</style>
+
+
+<div id="chart">
+  <svg></svg>
+</div>
+<div class="row marketing">
+<table class="table" id="top_devices_table">
+<thead>
+<tr>
+<th>Device</th>
+<th>Count</th>
+<th>View</th>
+</tr>
+</thead>
+<tbody>
+    {% for device in top_devices %}
+    <tr>
+	 <td>{{ device.mac_address }}</td>
+	<td>{{ device.count }}</td>
+	<td><a href={% url 'sniff:device_locations' device.url_mac %} class="btn btn-default" role="button" ><strong>Info</strong><br/>
+          </a></td>
+	</tr>    
+{% endfor %}
+</tbody>
+</table>
+</div>
+
+<script>
+
+var data =  [
+    {% for device in top_devices %}
+	  {
+        "label": "{{ device.mac_address }}",
+        "value" : {{ device.count }}
+      } ,
+ 
+	{% endfor %}
+
+];
+
+nv.addGraph(function() {
+  var chart = nv.models.pieChart()
+      .x(function(d) { return d.label })
+      .y(function(d) { return d.value })
+      .showLabels(false);
+
+    d3.select("#chart svg")
+        .datum(data)
+      .transition().duration(1200)
+        .call(chart);
+
+  return chart;
+});
+
+
+</script>
+<script>
+$(document).ready( function() {	
+	$('#top_devices_table').dataTable( {
+        "iDisplayLength": 25
+    } );
+} )
+
+</script>
+{% endblock %}

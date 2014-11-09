@@ -1,0 +1,51 @@
+{% extends 'sniff/base.html' %}
+
+{% block title %}Device: {{ mac_address }}{% endblock %}
+
+{% block body_block %}
+
+<div id="found_devices_div" class="row marketing">
+	<div class="row">
+		<div class="col-lg-9">
+			<h1>Device: {{ mac_address }}</h1>
+
+			<img class="img-responsive" src="{% url 'sniff:plot_device_times' mac_address %}" alt="Device graph">
+			</br></br>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-9">
+			<table id="found_devices" class="table" >
+				<thead>
+					<tr>
+						<th>Device</th>
+						<th>Station</th>
+						<th>Time</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for device in devices %}
+						<tr>
+							<td>{{ device.mac_address }}</td>
+							<td>{{ device.stations_id }}</td>
+							<td>{{ device.time}}</td>
+						</tr>    
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.2/js/jquery.dataTables.js"></script>
+
+<script>
+$(document).ready( function() {
+	
+	$('#found_devices').dataTable( {
+        "iDisplayLength": 50
+    } );
+} )
+
+</script>
+{% endblock %}

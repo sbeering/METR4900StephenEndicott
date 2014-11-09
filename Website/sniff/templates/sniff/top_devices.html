@@ -1,0 +1,44 @@
+{% extends 'sniff/base.html' %}
+
+
+
+{% block title %}Top Devices{% endblock %}
+
+{% block body_block %}
+<h1>Top 20 devices</h1>
+
+ 
+<div class="row marketing">
+<table class="table" id="top_devices_table">
+<thead>
+<tr>
+<th>Device</th>
+<th>Count</th>
+<th>View</th>
+</tr>
+</thead>
+<tbody>
+    {% for device in top_devices %}
+    <tr>
+	 <td>{{ device.mac_address }}</td>
+	<td>{{ device.count }}</td>
+	<td><a href={% url 'sniff:device_locations' device.url_mac %} class="btn btn-default" role="button" ><strong>Info</strong><br/>
+          </a></td>
+	</tr>    
+{% endfor %}
+</tbody>
+</table>
+</div>
+
+
+<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.2/js/jquery.dataTables.js"></script>
+<script>
+$(document).ready( function() {	
+	$('#top_devices_table').dataTable( {
+        "iDisplayLength": 25
+    } );
+} )
+
+</script>
+  
+{% endblock %}
